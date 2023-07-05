@@ -2,14 +2,17 @@ version: '2'
 services:
   redis-cluster:
     environment:
-     IP: ${REDIS_CLUSTER_IP}
-     SENTINEL: ${REDIS_USE_SENTINEL}
-     STANDALONE: ${REDIS_USE_STANDALONE}
+     IP: 0.0.0.0
+     SENTINEL: 'false'
+     STANDALONE: 'false'
+     INITIAL_PORT: 7000
+     MASTERS: 3
+     SLAVES_PER_MASTER: 1
     build:
       context: .
       args:
-        redis_version: '7.0.10'
+        redis_version: '6.2.6'
     hostname: server
     ports:
-      - '7000-7050:7000-7050'
-      - '5000-5010:5000-5010'
+      - '7000-7005:7000-7005'
+      - '5000-5005:5000-5005'
